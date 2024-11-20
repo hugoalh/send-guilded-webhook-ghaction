@@ -11,7 +11,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Send Discord Webhook"
-        uses: "hugoalh/send-discord-webhook-ghaction@main"
+        uses: "hugoalh/send-discord-webhook-ghaction@v7"
         with:
           key: "${{secrets.COMMUNITY_DISCORD_PROJECTNEWRELEASEANNOUNCER_WEBHOOK}}"
           embeds: |-
