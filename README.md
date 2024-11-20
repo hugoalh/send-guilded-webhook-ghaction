@@ -231,7 +231,7 @@ Examples:
       name: "Send Guilded Webhook"
       runs-on: "ubuntu-latest"
       steps:
-        - uses: "hugoalh/send-guilded-webhook-ghaction@v7.0.0"
+        - uses: "hugoalh/send-guilded-webhook-ghaction@v0.1.0"
           with:
             key: "${{secrets.GUILDED_WEBHOOK_KEY}}"
             content: "Hello, world!"
