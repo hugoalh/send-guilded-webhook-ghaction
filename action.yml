@@ -1,0 +1,55 @@
+name: "Send Guilded Webhook"
+author: "hugoalh"
+description: "Send Guilded webhook."
+inputs:
+  key:
+    description: "{string} Guilded webhook key."
+    required: true
+  username:
+    description: "{string} Override the default webhook username."
+    required: false
+  avatar_url:
+    description: "{string} Override the default webhook avatar."
+    required: false
+  content:
+    description: "{string} Message content."
+    required: false
+  content_links_no_embed:
+    description: "{RegExp[]} Links' regular expressions to prevent Guilded resolve and display matches links in the `content` as embed under the message."
+    required: false
+  embeds:
+    description: "{object[]} Message embed rich content."
+    required: false
+  files:
+    description: "{string[]} Message attachments/files."
+    required: false
+  files_glob:
+    description: "{boolean} Whether input `files` should accept Glob path instead of literal path."
+    required: false
+  truncate_enable:
+    description: "{boolean} Whether to try truncate firstly when inputs are too large."
+    required: false
+  truncate_ellipsis:
+    description: "{string} Ellipsis mark."
+    required: false
+  truncate_position:
+    description: "{string} Ellipsis position."
+    required: false
+  method_form:
+    description: "{boolean} Whether to force use of `multipart/form-data` instead of `application/json` on the webhook request."
+    required: false
+outputs:
+  response:
+    description: "{string} Response content."
+  status_code:
+    description: "{number} Request status code."
+  status_ok:
+    description: "{boolean} Whether the request was successful."
+  status_text:
+    description: "{string} Request status text."
+runs:
+  using: "docker"
+  image: "docker://ghcr.io/hugoalh/send-guilded-webhook-ghaction:0.1.0"
+branding:
+  icon: "send"
+  color: "yellow"
