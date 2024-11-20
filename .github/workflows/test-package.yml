@@ -10,11 +10,11 @@ jobs:
       - name: "List Docker Image"
         run: |-
           docker image ls --all --digests --no-trunc
-      - uses: "hugoalh/send-guilded-webhook-ghaction@dev"
+      - uses: "hugoalh/send-guilded-webhook-ghaction@main"
         with:
           key: "${{secrets.TEST_TEXT_WEBHOOK}}"
           content: "Hello, text channel!"
-      - uses: "hugoalh/send-guilded-webhook-ghaction@dev"
+      - uses: "hugoalh/send-guilded-webhook-ghaction@main"
         with:
           key: "${{secrets.TEST_TEXT_WEBHOOK}}"
           content: "Text message. Up to 2000 characters."
@@ -67,7 +67,7 @@ jobs:
       - shell: "pwsh"
         run: |-
           Invoke-WebRequest -Uri 'https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0b52aa9e99b832574a53_full_logo_blurple_RGB.png' -MaximumRetryCount 5 -RetryIntervalSec 5 -Method 'Get' -OutFile 'thumbnail.png'
-      - uses: "hugoalh/send-guilded-webhook-ghaction@dev"
+      - uses: "hugoalh/send-guilded-webhook-ghaction@main"
         with:
           key: "${{secrets.TEST_TEXT_WEBHOOK}}"
           content: "This is the Discord logo."
