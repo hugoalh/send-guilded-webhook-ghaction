@@ -34,7 +34,6 @@ const thresholdFiles = 10;
 const thresholdUsername = 80;
 const regexpGuildedWebhookURL = /^(?:https:\/\/media\.guilded\.gg\/webhooks\/)?(?<key>\d+\/(?:[\dA-Za-z][\dA-Za-z_-]*)?[\dA-Za-z])$/u;
 const regexpISO8601 = /^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\dZ$/;
-const regexpSnowflake = /^\d+$/;
 //deno-lint-ignore default-param-last
 export function resolveContent(content: string, contentLinksNoEmbed: string[] = [], truncator?: StringTruncator): string | undefined {
 	const contentLinksNoEmbedRegExp: RegExp | undefined = (contentLinksNoEmbed.length > 0) ? new RegExp(contentLinksNoEmbed.join("|"), "u") : undefined;
