@@ -27,7 +27,7 @@ import {
 } from "./_payload.ts";
 console.log("Initialize.");
 const exfetch: ExFetch = new ExFetch({
-	userAgent: `${userAgentDefault} SendGuildedWebhook.GitHubAction/0.1.0`
+	userAgent: `${userAgentDefault} SendGuildedWebhook.GitHubAction/0.1.1`
 });
 const splitterNewLine = /\r?\n/g;
 writeDebug(`Environment Variables:\n\t${Object.entries(Deno.env.toObject()).map(([key, value]: [string, string]): string => {
