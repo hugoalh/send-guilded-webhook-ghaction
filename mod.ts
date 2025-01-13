@@ -1,6 +1,6 @@
 import {
-	ExFetch,
-	userAgentDefault
+	exFetch,
+	type ExFetchEventRetryPayload
 } from "EXFETCH/mod.ts";
 import {
 	addSecretMask,
@@ -26,10 +26,8 @@ import {
 	resolveUsername
 } from "./_payload.ts";
 console.log("Initialize.");
-const exfetch: ExFetch = new ExFetch({
-	userAgent: `${userAgentDefault} SendGuildedWebhook.GitHubAction/0.1.1`
-});
 const splitterNewLine = /\r?\n/g;
+const userAgent = `SendGuildedWebhook.GitHubAction/0.1.1`;
 writeDebug(`Environment Variables:\n\t${Object.entries(Deno.env.toObject()).map(([key, value]: [string, string]): string => {
 	return `${key} = ${value}`;
 }).join("\n\t")}`);
@@ -91,11 +89,28 @@ try {
 		return requestPayloadStringify;
 	})();
 	console.log(`Post network request to Guilded.`);
-	const response: Response = await exfetch.fetch(`https://media.guilded.gg/webhooks/${key}`, {
+	const response: Response = await exFetch(`https://media.guilded.gg/webhooks/${key}`, {
 		body: requestBody,
 		headers: requestHeaders,
 		method: "POST",
 		redirect: "follow"
+	}, {
+		retry: {
+			onRetry({
+				countCurrent,
+				countMaximum,
+				statusCode,
+				statusText,
+				timeWait
+			}: ExFetchEventRetryPayload): void {
+				console.log(`Last network request failed with status \`${statusCode} ${statusText}. Retry #${countCurrent}/${countMaximum} after ${timeWait / 1000} seconds\`.`);
+			},
+			timeWait: {
+				maximum: 120000,
+				minimum: 10000
+			}
+		},
+		userAgent
 	}).catch((reason: Error): never => {
 		throw new Error(`Unexpected web request issue: ${reason?.message ?? reason}`);
 	});
